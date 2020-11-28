@@ -26,7 +26,8 @@ Follow the basic rules of the game: ( https://service.mattel.com/instruction_she
 + Explain each line of code
 
 ### Program Components:
-+ Branching oUser defined function
++ Branching
++ User defined function
 + Array
 + Loop
 + Random Number Generator
