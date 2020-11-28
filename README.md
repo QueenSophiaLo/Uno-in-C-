@@ -4,30 +4,31 @@ This is a class project where we need to code UNO in C++. Currently, the code is
 UNO Objective:
 
 Create a game of UNO for at least two players.
+
 Follow the basic rules of the game: ( https://service.mattel.com/instruction_sheets/42001pr.pdf )
 
 Requirements: Inputs 
-o Name of players
-o Any decisions the player needs to make about what card to play
-o When a player has UNO Outputs
-o Player turn
-o What cards the player has
-o What card is being played
-o Winner
++ Name of players
++ Any decisions the player needs to make about what card to play
++ When a player has UNO Outputs
++ Player turn
++ What cards the player has
++ What card is being played
++ Winner
 
 Program Format:
-o Directions & Player Name
-o Comments
++ Directions & Player Name
++ Comments
 
 Each Participant should be able to:
-o Explain each line of code
++ Explain each line of code
 
 Program Components:
-o Branching oUser defined function
-o Array
-o Loop
-o Random Number Generator
++ Branching oUser defined function
++ Array
++ Loop
++ Random Number Generator
 
 Creative Liberties:
-o Number of players
-o Visual display 
++ Number of players
++ Visual display 
