@@ -11,7 +11,8 @@ o Name of players
 o Any decisions the player needs to make about what card to play
 o When a player has UNO Outputs
 o Player turn
-o What cards the player has o What card is being played
+o What cards the player has
+o What card is being played
 o Winner
 
 Program Format:
