@@ -3,6 +3,16 @@
 #include <cstdlib>
 using namespace std;
 
+/* FIXME current bugs:
+		- UNO reverse
+		- draw 4
+		- draw 2
+		- wild draw 4
+		- condense the code
+		- fix the logic
+		- add objects instead of using vectors/arrays?
+/*
+
 // Global Variables
 string currCardColor;
 string currCardNum;
