@@ -515,67 +515,58 @@ void StrToNum ()
     }
   else if (cardColorPlayed == "blue")
     {if (cardNumPlayed == "0"){
-	  cardPlayed1 = 42;
-	}else if (cardNumPlayed == "1"){
-	  cardPlayed1 = 43;
-	  cardPlayed2 = 95;
-	}else if (cardNumPlayed == "2"){
-	  cardPlayed1 = 44;
-	  cardPlayed2 = 96;
-	}else if (cardNumPlayed == "3"){
-	  cardPlayed1 = 45;
-	  cardPlayed2 = 97;
-	}else if (cardNumPlayed == "4"){
-	  cardPlayed1 = 46;
-	  cardPlayed2 = 98;
-	}else if (cardNumPlayed == "5"){
-	  cardPlayed1 = 47;
-	  cardPlayed2 = 99;
-	}else if (cardNumPlayed == "6"){
-	  cardPlayed1 = 48;
-	  cardPlayed2 = 100;
-	}else if (cardNumPlayed == "7"){
-	  cardPlayed1 = 49;
-	  cardPlayed2 = 101;
-	}else if (cardNumPlayed == "8"){
-	  cardPlayed1 = 50;
-	  cardPlayed2 = 102;
-	}else if (cardNumPlayed == "9"){
-	  cardPlayed1 = 51;
-	  cardPlayed2 = 103;
-	}else if (cardNumPlayed == "skip"){
-	  cardPlayed1 = 52;
-	  cardPlayed2 = 104;
-	}
-      else if (cardNumPlayed == "reverse")
-	{
-	  cardPlayed1 = 53;
-	  cardPlayed2 = 105;
-	}
-      else if (cardNumPlayed == "draw")
-	{
+		  cardPlayed1 = 42;
+	}	else if (cardNumPlayed == "1"){
+		  cardPlayed1 = 43;
+		  cardPlayed2 = 95;
+	}	else if (cardNumPlayed == "2"){
+		  cardPlayed1 = 44;
+		  cardPlayed2 = 96;
+	}	else if (cardNumPlayed == "3"){
+		  cardPlayed1 = 45;
+		  cardPlayed2 = 97;
+	}	else if (cardNumPlayed == "4"){
+		  cardPlayed1 = 46;
+		  cardPlayed2 = 98;
+	}	else if (cardNumPlayed == "5"){
+		  cardPlayed1 = 47;
+		  cardPlayed2 = 99;
+	}	else if (cardNumPlayed == "6"){
+		  cardPlayed1 = 48;
+		  cardPlayed2 = 100;
+	}	else if (cardNumPlayed == "7"){
+		  cardPlayed1 = 49;
+		  cardPlayed2 = 101;
+	}	else if (cardNumPlayed == "8"){
+		  cardPlayed1 = 50;
+		  cardPlayed2 = 102;
+	}	else if (cardNumPlayed == "9"){
+		  cardPlayed1 = 51;
+		  cardPlayed2 = 103;
+	}	else if (cardNumPlayed == "skip"){
+		  cardPlayed1 = 52;
+		  cardPlayed2 = 104;
+	}	else if (cardNumPlayed == "reverse"){
+		  cardPlayed1 = 53;
+		  cardPlayed2 = 105;
+	}	else if (cardNumPlayed == "draw"){
 	      cardPlayed1 = 54;
 	      cardPlayed2 = 106;
-	}
-      else if (cardNumPlayed == "card")
-	{
-	  cardPlayed1 = 13;
-	  cardPlayed2 = 27;
-	  cardPlayed3 = 41;
-	  cardPlayed4 = 55;
+	}	else if (cardNumPlayed == "card"){
+		  cardPlayed1 = 13;
+		  cardPlayed2 = 27;
+		  cardPlayed3 = 41;
+		  cardPlayed4 = 55;
 	}
     }
-  else if (cardColorPlayed == "wild")
-    {
-      if (cardNumPlayed == "card")
-	{
+  else if (cardColorPlayed == "wild"){
+      if (cardNumPlayed == "card"){
 	  cardPlayed1 = 13;
 	  cardPlayed2 = 27;
 	  cardPlayed3 = 41;
 	  cardPlayed4 = 55;
 	}
-      else if (cardNumPlayed == "draw")
-	{
+      else if (cardNumPlayed == "draw"){
 	  cardPlayed1 = 68;
 	  cardPlayed2 = 81;
 	  cardPlayed3 = 94;
@@ -584,119 +575,84 @@ void StrToNum ()
     }
 }
 
-int GetPoints (vector < int >&player1, vector < int >&player2, vector < int >&player3, vector < int >&player4, vector < int >&player5, vector < int >&player6, vector < int >&player7, vector < int >&player8, vector < int >&player9, vector < int >&player10, int playerAmount)
+int GetPoints (vector<int>& player1, vector<int>& player2, vector<int>& player3, vector<int>& player4, vector<int>& player5, vector<int>& player6, vector<int>& player7, vector<int>& player8, vector<int>& player9, vector<int>& player10, int playerAmount)
 {
   int totalPoints = 0;
 
-  for (int i = 1; i <= playerAmount; ++i)
-    {
-      if (i == 1)
-	{
-	  if (player1.size () == 0)
-	    {
+  for (int i = 1; i <= playerAmount; ++i){
+      if (i == 1){
+	  if (player1.size () == 0){
 	      player1Out = true;
-	    }
-	  else
-	    {
+	  }else{
 	      totalPoints = totalPoints + Points (player1);
 	    }
-	}
-      else if (i == 2)
-	{
-	  if (player2.size () == 0)
-	    {
+	}	else if (i == 2){
+	  if (player2.size () == 0){
 	      player2Out = true;
-	    }
-	  else
-	    {
+	  }else{
 	      totalPoints = totalPoints + Points (player2);
 	    }
 	}
-      else if (i == 3)
-	{
-	  if (player3.size () == 0)
-	    {
+      else if (i == 3){
+	  if (player3.size () == 0){
 	      player3Out = true;
-	    }
-	  else
-	    {
+	  }else{
 	      totalPoints = totalPoints + Points (player3);
 	    }
-	}
-      else if (i == 4)
-	{
-	  if (player4.size () == 0)
-	    {
+	}else if (i == 4){
+	  if (player4.size () == 0){
 	      player4Out = true;
 	    }
-	  else
-	    {
+	  else{
 	      totalPoints = totalPoints + Points (player4);
 	    }
 	}
-      else if (i == 5)
-	{
+      else if (i == 5){
 	  if (player5.size () == 0)
 	    {
 	      player5Out = true;
 	    }
-	  else
-	    {
+	  else{
 	      totalPoints = totalPoints + Points (player5);
 	    }
 	}
-      else if (i == 6)
-	{
+      else if (i == 6){
 	  if (player6.size () == 0)
 	    {
 	      player6Out = true;
 	    }
-	  else
-	    {
+	  else{
 	      totalPoints = totalPoints + Points (player6);
 	    }
-	}
-      else if (i == 7)
-	{
-	  if (player7.size () == 0)
-	    {
+	}else if (i == 7){
+	  if (player7.size () == 0){
 	      player7Out = true;
 	    }
-	  else
-	    {
+	  else{
 	      totalPoints = totalPoints + Points (player7);
 	    }
-	}
-      else if (i == 8)
-	{
-	  if (player8.size () == 0)
-	    {
+	}else if (i == 8){
+	  if (player8.size () == 0){
 	      player8Out = true;
 	    }
-	  else
-	    {
+	  else{
 	      totalPoints = totalPoints + Points (player8);
 	    }
 	}
-      else if (i == 9)
-	{
-	  if (player9.size () == 0)
-	    {
+      else if (i == 9){
+	  if (player9.size () == 0){
 	      player9Out = true;
 	    }
-	  else
-	    {
+	  else{
 	      totalPoints = totalPoints + Points (player9);
 	    }
 	}
-      else if (i == 10)
-	{
+      else if (i == 10){
 	  if (player10.size () == 0)
 	    {
 	      player10Out = true;
 	    }
-	  else
-	    {
+	  else{
 	      totalPoints = totalPoints + Points (player10);
 	    }
 	}
@@ -705,7 +661,7 @@ int GetPoints (vector < int >&player1, vector < int >&player2, vector < int >&pl
   return totalPoints;
 }
 
-void PlayerTurn (vector < string > &playerName, vector < int >&currPlayer, vector < int >&Deck, vector < int >&Discard, int playerTurn)
+void PlayerTurn (vector < string > &playerName, vector<int>&currPlayer, vector<int>&Deck, vector<int>&Discard, int playerTurn)
 {
   bool cont = false;
   bool haveCard = false;
@@ -887,20 +843,20 @@ void PlayerTurn (vector < string > &playerName, vector < int >&currPlayer, vecto
 
 int main ()
 {
-  vector < int >Deck (108);
-  vector < int >Shuffle (108);
-  vector < int >Discard (1);
+  vector<int>Deck (108);
+  vector<int>Shuffle (108);
+  vector<int>Discard (1);
 
-  vector < int >player1 (7);	//only use the vectors of the amount of players that will be playing
-  vector < int >player2 (7);
-  vector < int >player3 (7);
-  vector < int >player4 (7);
-  vector < int >player5 (7);
-  vector < int >player6 (7);
-  vector < int >player7 (7);
-  vector < int >player8 (7);
-  vector < int >player9 (7);
-  vector < int >player10 (7);
+  vector<int>player1 (7);	//only use the vectors of the amount of players that will be playing
+  vector<int>player2 (7);
+  vector<int>player3 (7);
+  vector<int>player4 (7);
+  vector<int>player5 (7);
+  vector<int>player6 (7);
+  vector<int>player7 (7);
+  vector<int>player8 (7);
+  vector<int>player9 (7);
+  vector<int>player10 (7);
 
   //variables
   int i = 0;
@@ -931,10 +887,10 @@ int main ()
   int player9Points = 0;
   int player10Points = 0;
 
-  //output for rules of the game
+// output for rules of the game
 OutputRules();
 
-  //getting input for number of players
+// getting input for number of players
   cout << "How many players will be playing: ";
   cin >> playerAmount;
   while (playerNum == false){
@@ -947,21 +903,20 @@ OutputRules();
 	  playerNum = true;
 	}
     }
-
-  //getting input for names of players
-  vector<string> playerName (playerAmount);	//vector made to store names
+// getting input for names of players
+  vector<string> playerName (playerAmount);								//vector made to store names
   string plyrName;
   for (i = 1; i <= playerAmount; ++i){
-      cout << "Please enter player " << i << "'s name: ";	//ask user for their name
-      cin >> plyrName;		//get user input
-      playerName.at (i - 1) = plyrName;	//each name entered goes into the vector (element 0 is player 1)
+      cout << "Please enter player " << i << "'s name: ";				//ask user for their name
+      cin >> plyrName;													//get user input
+      playerName.at (i - 1) = plyrName;									//each name entered goes into the vector (element 0 is player 1)
     }
   while ((player1Points < 500) && (player2Points < 500)
 	 && (player3Points < 500) && (player4Points < 500)
 	 && (player5Points < 500) && (player6Points < 500)
 	 && (player7Points < 500) && (player8Points < 500)
 	 && (player9Points < 500) && (player10Points < 500)){
-      //loops to shuffle the deck that will be drawing from
+// loops to shuffle the deck that will be drawing from
       while (wildCard == true){
 	  for (i = 0; i < Shuffle.size (); ++i){
 	      Shuffle.at (i) = i;
@@ -983,112 +938,93 @@ OutputRules();
 	      wildCard = false;
 	    }
 	}
-
-      //fill the vectors for the # of players in the game
-      for (i = 1; i <= playerAmount; ++i){
-	  if (i == 1){
+//fill the vectors for the # of players in the game
+	  if (playerAmount == 1){
 	      playerBool1 = true;
-	    }	if (i == 2){
+	    }	else if (playerAmount == 2){
 	      playerBool2 = true;
-	    }	if (i == 3){
+	    }	else if (playerAmount == 3){
 	      playerBool3 = true;
-	    }	if (i == 4){
+	    }	else if (playerAmount == 4){
 	      playerBool4 = true;
-	    }	if (i == 5){
+	    }	else if (playerAmount == 5){
 	      playerBool5 = true;
-	    }	if (i == 6){
+	    }	else if (playerAmount == 6){
 	      playerBool6 = true;
-	    }	if (i == 7){
+	    }	else if (playerAmount == 7){
 	      playerBool7 = true;
-	    }	if (i == 8){
+	    }	else if (playerAmount == 8){
 	      playerBool8 = true;
-	    }	if (i == 9){
+	    }	else if (playerAmount == 9){
 	      playerBool9 = true;
-	    }	if (i == 10){
+	    }	else if (playerAmount == 10){
 	      playerBool10 = true;
 	    }
-	}
-      counter = 0;
+	}counter = 0;
       if (playerBool1 == true){
 	  for (i = 0; i < player1.size (); ++i){
 	      player1.at (i) = Deck.at (counter);
 	      counter += playerAmount;
 	    }
-	}
-      counter = 1;
+	}counter = 1;
       if (playerBool2 == true){
 	  for (i = 0; i < player2.size (); ++i){
 	      player2.at (i) = Deck.at (counter);
 	      counter += playerAmount;
 	    }
-	}
-      counter = 2;
+	}counter = 2;
       if (playerBool3 == true){
 	  for (i = 0; i < player3.size (); ++i){
 	      player3.at (i) = Deck.at (counter);
 	      counter += playerAmount;
 	    }
-	}
-      counter = 3;
-      if (playerBool4 == true)
-	{
-	  for (i = 0; i < player4.size (); ++i)
-	    {
+	}counter = 3;
+      if (playerBool4 == true){
+	  for (i = 0; i < player4.size (); ++i){
 	      player4.at (i) = Deck.at (counter);
 	      counter += playerAmount;
 	    }
-	}
-      counter = 4;
-      if (playerBool5 == true)
-	{
-	  for (i = 0; i < player5.size (); ++i)
-	    {
+	}counter = 4;
+      if (playerBool5 == true){
+	  for (i = 0; i < player5.size (); ++i){
 	      player5.at (i) = Deck.at (counter);
 	      counter += playerAmount;
 	    }
-	}
-      counter = 5;
-      if (playerBool6 == true)
-	{
+	}counter = 5;
+      if (playerBool6 == true){
 	  for (i = 0; i < player6.size (); ++i){
 	      player6.at (i) = Deck.at (counter);
 	      counter += playerAmount;
 	    }
-	}
-      counter = 6;
-      if (playerBool7 == true)
-	{
+	}counter = 6;
+      if (playerBool7 == true){
 	  for (i = 0; i < player7.size (); ++i){
 	      player7.at (i) = Deck.at (counter);
 	      counter += playerAmount;
 	    }
-	}
-      counter = 7;
+	}counter = 7;
       if (playerBool8 == true){
 	  for (i = 0; i < player8.size (); ++i){
 	      player8.at (i) = Deck.at (counter);
 	      counter += playerAmount;
 	    }
-	}
-      counter = 8;
+	}counter = 8;
       if (playerBool9 == true){
 	  for (i = 0; i < player9.size (); ++i){
 	      player9.at (i) = Deck.at (counter);
 	      counter += playerAmount;
 	    }
-	}
-      counter = 9;
+	}counter = 9;
       if (playerBool10 == true){
 	  for (i = 0; i < player10.size (); ++i){
 	      player10.at (i) = Deck.at (counter);
 	      counter += playerAmount;
 	    }
-	}
-      currDeckPosition = playerAmount * 7;
+	}currDeckPosition = playerAmount * 7;
       Discard.at (0) = Deck.at (currDeckPosition);
       cout << endl;
 
-      //begin player turns
+// begin player turns
       while (playerIsOut == false){
 	  if (reverse == false){
 	      if (playerSkip == true){
@@ -1357,7 +1293,7 @@ OutputRules();
 				}	else if (playerAmount == 6){
 					  player6.push_back (Deck.at (currDeckPosition++));
 					  player6.push_back (Deck.at (currDeckPosition++));
-				}	lse if (playerAmount == 7){
+				}	else if (playerAmount == 7){
 					  player7.push_back (Deck.at (currDeckPosition++));
 					  player7.push_back (Deck.at (currDeckPosition++));
 				}	else if (playerAmount == 8){
@@ -1444,48 +1380,40 @@ OutputRules();
 			  }i = i - 1;
 			  draw4 = false;
 			}
-		    }
-		  else if (i == 3){
+		    }else if (i == 3){
 		      PlayerTurn (playerName, player3, Deck, Discard, i);
 		      if (reverse == true){
 			  playerTurn = i + 1;
 			  break;
-			}
-		      if (skip == true){
+			}if (skip == true){
 			  if (i == 1){
 			      playerSkip = true;
 			      skip = false;
-			    }
-			  else{
+			    }else{
 			      --i;
 			      skip = false;
 			    }
-			}
-		      if (draw2 == true){
+			}if (draw2 == true){
 			  player2.push_back (Deck.at (currDeckPosition++));
 			  player2.push_back (Deck.at (currDeckPosition++));
 			  i = i - 1;
 			  draw2 = false;
-			}
-		      if (draw4 == true){
+			}if (draw4 == true){
 			  for (int counter = 1; counter <= 4; ++counter){
 			  player2.push_back (Deck.at (currDeckPosition++));
 			  }i = i - 1;
 			  draw4 = false;
 			}
-		    }
-		  else if (i == 4){
+		    }else if (i == 4){
 		      PlayerTurn (playerName, player4, Deck, Discard, i);
 		      if (reverse == true){
 			  playerTurn = i + 1;
 			  break;
-			}
-		      if (skip == true){
+			}if (skip == true){
 			  if (i == 1){
 			      playerSkip = true;
 			      skip = false;
-			    }
-			  else{
+			    }else{
 			      --i;
 			      skip = false;
 			    }
@@ -1500,43 +1428,36 @@ OutputRules();
 				  }i = i - 1;
 				  draw4 = false;
 			}
-		    }
-		  else if (i == 5){
+		    }else if (i == 5){
 		      PlayerTurn (playerName, player5, Deck, Discard, i);
 		      if (reverse == true){
 			  playerTurn = i + 1;
 			  break;
-			}
-		      if (skip == true){
+			}if (skip == true){
 			  if (i == 1){
 			      playerSkip = true;
 			      skip = false;
-			    }
-			  else{
+			    }else{
 			      --i;
 			      skip = false;
 			    }
-			}
-		      if (draw2 == true){
+			}if (draw2 == true){
 			  player4.push_back (Deck.at (currDeckPosition++));
 			  player4.push_back (Deck.at (currDeckPosition++));
 			  i = i - 1;
 			  draw2 = false;
-			}
-		      if (draw4 == true){
+			}if (draw4 == true){
 			  for (int counter = 1; counter <= 4; ++counter){
 			  player4.push_back (Deck.at (currDeckPosition++));
 			  }i = i - 1;
 			  draw4 = false;
 			}
-		    }
-		  else if (i == 6){
+		    }else if (i == 6){
 		      PlayerTurn (playerName, player6, Deck, Discard, i);
 		      if (reverse == true){
 			  playerTurn = i + 1;
 			  break;
-			}
-		      if (skip == true){
+			}if (skip == true){
 			  if (i == 1){
 			      playerSkip = true;
 			      skip = false;
@@ -1545,89 +1466,71 @@ OutputRules();
 			      --i;
 			      skip = false;
 			    }
-			}
-		      if (draw2 == true){
+			}if (draw2 == true){
 			  player5.push_back (Deck.at (currDeckPosition++));
 			  player5.push_back (Deck.at (currDeckPosition++));
 			  i = i - 1;
 			  draw2 = false;
-			}
-		      if (draw4 == true){
+			}if (draw4 == true){
 			  for (int counter = 1; counter <= 4; ++counter){
 			  player3.push_back (Deck.at (currDeckPosition++));
 			  }i = i - 1;
 			  draw4 = false;
 			}
-		    }
-		  else if (i == 7){
+		    }else if (i == 7){
 		      PlayerTurn (playerName, player7, Deck, Discard, i);
 		      if (reverse == true){
 			  playerTurn = i + 1;
 			  break;
-			}
-		      if (skip == true){
+			}if (skip == true){
 			  if (i == 1){
 			      playerSkip = true;
 			      skip = false;
-			    }
-			  else{
+			    }else{
 			      --i;
 			      skip = false;
 			    }
-			}
-		      if (draw2 == true){
+			}if (draw2 == true){
 			  player6.push_back (Deck.at (currDeckPosition++));
 			  player6.push_back (Deck.at (currDeckPosition++));
 			  i = i - 1;
 			  draw2 = false;
-			}
-		      if (draw4 == true){
+			}if (draw4 == true){
 				for (int counter = 1; counter <= 4; ++counter){
 				player3.push_back (Deck.at (currDeckPosition++));
 				}i = i - 1;
 				draw4 = false;
 			}
-		    }
-		  else if (i == 8)
-		    {
+		    }else if (i == 8){
 		      PlayerTurn (playerName, player8, Deck, Discard, i);
-		      if (reverse == true)
-			{
+		      if (reverse == true){
 			  playerTurn = i + 1;
 			  break;
-			}
-		      if (skip == true){
+			}if (skip == true){
 			  if (i == 1){
 			      playerSkip = true;
 			      skip = false;
-			    }
-			  else{
+			    }else{
 			      --i;
 			      skip = false;
 			    }
-			}
-		      if (draw2 == true){
+			}if (draw2 == true){
 			  player7.push_back (Deck.at (currDeckPosition++));
-			  
 			  player7.push_back (Deck.at (currDeckPosition++));
-			  
 			  i = i - 1;
 			  draw2 = false;
-			}
-		      if (draw4 == true){
+			}if (draw4 == true){
 			  for (int counter = 1; counter <= 4; ++counter){
 			  player3.push_back (Deck.at (currDeckPosition++));
 			  }i = i - 1;
 			  draw4 = false;
 			}
-		    }
-		  else if (i == 9){
+		    }else if (i == 9){
 		      PlayerTurn (playerName, player9, Deck, Discard, i);
 		      if (reverse == true){
 			  playerTurn = i + 1;
 			  break;
-			}
-		      if (skip == true){
+			}if (skip == true){
 			  if (i == 1){
 			      playerSkip = true;
 			      skip = false;
@@ -1636,14 +1539,12 @@ OutputRules();
 			      --i;
 			      skip = false;
 			    }
-			}
-		      if (draw2 == true){
+			}if (draw2 == true){
 			  player8.push_back (Deck.at (currDeckPosition++));
 			  player8.push_back (Deck.at (currDeckPosition++));
 			  i = i - 1;
 			  draw2 = false;
-			}
-		      if (draw4 == true){
+			}if (draw4 == true){
 			  for (int counter = 1; counter <= 4; ++counter){
 			  player8.push_back (Deck.at (currDeckPosition++));
 			  }i = i - 1;
@@ -1702,11 +1603,6 @@ OutputRules();
 		}	else if (player10Out == true){
 		  player10Points = GetPoints (player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, playerAmount);
 		}
+	  cout << "Game Over";
+	return 0;
 }																						//bracket for end of while loop
-  cout << "Game Over";
-
-  return 0;
-}
-
-
-
