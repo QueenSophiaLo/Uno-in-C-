@@ -1,5 +1,5 @@
 # Uno-in-C++
-This is a class project where we need to code UNO in C++. Currently, the code is spaghetti code with many bugs. You can't play a full game of UNO but you can certainly try.
+This is a class project where we need to code UNO in C++. Currently, the code is spaghetti code with a ton of bugs. You can't play a full game of UNO but you can certainly try.
 
 ## UNO Objective:
 
