@@ -75,7 +75,6 @@ void WildCardPlayed(Card topcard){
 }
 
 
-
 // Act_None continues to increment/decrement player turns
 
 // Act_Reverse switches "bool reverse" value to increment turns in the opposite direction
@@ -111,6 +110,33 @@ class Card {
 		Action GetAction(){
 			return action;
 		};
+	string WhatCardIsThis(){
+		string cardName;
+		if(this->GetColor() == RED){									// interperet card's values
+			cardName = "red ";
+		}	else if(this->GetColor() == YELLOW){
+    			cardName = "yellow ";
+		}	else if(this->GetColor() == BLUE){
+    			cardName = "blue ";
+		}	else if(this->GetColor() == GREEN){
+    			cardName = "green ";
+  		}
+		
+		if(this->GetValue() == REVERSE & this->GetAction() == Act_Reverse){
+			cardName += "reverse";
+		}	else if(this->GetValue() == SKIP & this->GetAction() == Act_Skip){
+				cardName += "skip";
+		}	else if(this->GetValue() == DRAWTWO & this->GetAction() == Act_Draw2){
+				cardName += "draw 2";
+		}	else if(this->GetValue() == DRAWFOUR & this->GetAction() == Act_WildDraw4){
+				cardName = "draw 4";
+		}	else if(this->GetValue() == WILDCARD & this->GetAction() == Act_Wild){
+				cardName = "wildcard";
+		}	else{
+				cardName += std::to_string(this->GetValue());
+  }
+  return cardName;														// return a string with card name
+}
 	bool CanCardBePlayed(Card topCard){
 		if ((topCard.color == color) || (topCard.value == value) || (color == WILD)){		// if you play a card that has the same color/number OR is a wild card 
 			return true;																	// then the card CAN be played
@@ -187,6 +213,9 @@ class Deck{
 		return temp;													// return the card value
 	}
 	}
+	Card returnCard(int index){
+		return cards.at(index);
+	}
 }
 	/* 
 	
@@ -218,7 +247,7 @@ class Player{
 	public:
 
 	Hand GetHand(){																// creates object holding hand vectors
-		// FIXME how would I access all my player's hands?
+		return hand;
 	}
 	Points GetPoint(){																// creates object holding player points
 		playerPoints(playerAmount);												// create a vector the size of player amount
@@ -286,12 +315,7 @@ void PlayerHasZeroCards(FIXME current players hand, current players name, Card t
 			FIXME add two cards to players hand
 		}
 }
-/* points are kinda weird tbh
-"At the end of an Uno hand the losing players must total the cards left in their hand.
-The sum total is recorded and the game is over when the first player reaches 500 points.
-At the point a player hits 500 points, the overall winner is the player who has the lowest score
-- since avoiding scoring points is the name of the game here."
-*/
+
 void PlayerHas500Points(vector<int> playerpoints, int playerNum){
 	for (int i = 0; i < playerNum; ++i){
 		if (playerpoints.at(i) <= 500){
@@ -337,7 +361,6 @@ int main(){
 // variables
 Card topCard;											// the card on top of the stack
 vector<Player> plyrNames;								// the vector containing all the player's names
-
 	
 // output for rules of the game
 OutputRules();
