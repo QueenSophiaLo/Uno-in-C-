@@ -4,7 +4,8 @@
 using namespace std;
 
 // global variables
-bool reverse;															// reverse = true is clockwise player motion and vis versa
+bool reverse = true;													// reverse = true is clockwise player motion and vis versa
+bool skip = false;														// skip used for action cards to skip player's turns
 int playerTurn;															// is incremented or decremented to show player's turn
 int playerAmount;														// amount of players playing the game
 
@@ -31,9 +32,7 @@ void OutputRules(){
   cout << "Wild Draw 4 Cards:\t50 Points" << endl;
   cout << "Now have fun!" << endl << endl;
 }
-
-  /*
-     numbers 0-9 are red cards 0-9; 10-12 are red skip, red reverse, and red draw 2 in that order
+/*   numbers 0-9 are red cards 0-9; 10-12 are red skip, red reverse, and red draw 2 in that order
      numbers 14-23 are yellow cards 0-9; 24-26 are yellow skip, yellow reverse, and yellow draw 2 in that order
      numbers 28-37 are green cards 0-9; 38-40 are green skip, green reverse, and green draw 2 in that order
      numbers 42-51 are blue cards 0-9; 52-54 are blue skip, blue reverse, and blue draw 2 in that order
@@ -43,8 +42,8 @@ void OutputRules(){
      numbers 95-103 are blue cards 1-9; 104-106 are blue skip, blue reverse, and blue draw 2 in that order
      numbers 13, 27, 41, and 55 are wild cards
      numbers 68, 81, 94, and 107 are wild draw 4 cards
-   */
-
+*/
+// making cards as objects
 enum Color {RED, YELLOW, GREEN, BLUE, WILD};
 enum Value {
 ZERO = 0,																// zero cards are zero points
@@ -81,20 +80,52 @@ class Card {
             return color;
         };
 };
+// wild card
+
+
+// getting input for number of players
+void InputForPlayerAmount(int playerAmount){ 
+	cout << "How many players will be playing: ";
+	cin >> playerAmount;
+			while ((playerAmount < 2) || (playerAmount > 10)){
+			cout << "\nOnly 2-10 players are allowed to play." << endl;
+			cout << "How many players will be playing: ";
+			cin >> playerAmount;
+			}
+}
 
 int main(){
 // output for rules of the game
 	OutputRules();
 
+// getting input for number of players
+	int playerAmount;
+	InputForPlayerAmount(playerAmount);
+
+// getting input for names of players
+  vector<string> playerName(playerAmount);								//vector made to store names
+  string plyrName;
+  for (int i = 1; i <= playerAmount; ++i){
+      cout << "Please enter player " << i << "'s name: ";				//ask user for their name
+      cin >> plyrName;													//get user input
+      playerName.at(i - 1) = plyrName;									//each name entered goes into the vector (element 0 is player 1)
+    }
+	
 // playable card
 	// if value or color is the same then it is playable
 
 // turn increments/decrements	
-	if (reverse == "true"){
-	playerTurn = (playerTurn - 1) % playerAmount;					// counterclockwise player movement (next valid player)
-	}	else {
-		playerTurn = (playerTurn + 1) % playerAmount;				// clockwise player movement (next valid player)
-	}
+	if ((reverse == "true") && (skip == "false")){
+	playerTurn = (playerTurn - 1) % playerAmount;						// counterclockwise player movement (next valid player)
+	}	else if ((reverse == "true") && (skip == "true")) {
+		playerTurn = (playerTurn - 2) % playerAmount;
+		}	else if ((reverse == "false") && (skip == "false")){
+			playerTurn = (playerTurn + 1) % playerAmount;				// clockwise player movement (next valid player)
+			}	else if ((reverse == "false") && (skip == "true")){
+				playerTurn = (playerTurn + 2) % playerAmount;
+				}
+	
+// ending parameters
 	cout << "Game Over";
 	return 0;
 }
