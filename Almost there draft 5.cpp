@@ -5,41 +5,38 @@
 using namespace std;
 
 // Global Variables
-bool plyrMotion = false;                        				// false is clockwise player motion and vis versa
+bool plyrMotion = false;						// false is clockwise player motion and vis versa
 int reverse = 0;
-bool skip = false;														// skip used for action cards to skip player's turns
+bool skip = false;								// skip used for action cards to skip player's turns
 int skipBool = 0;
-int currDeckSize = 108;													// 108 cards in the deck (starts with 108 cards)
-int playerAmount;														// amount of players playing the game
-int playerTurn;															// is incremented or decremented to show player's turn
+int currDeckSize = 108;							// 108 cards in the deck (starts with 108 cards)
+int playerAmount;								// amount of players playing the game
+int playerTurn;									// is incremented or decremented to show player's turn
 
 
 enum Color {RED, YELLOW, GREEN, BLUE, WILD};
 enum Value {
-ZERO = 0,																// zero cards are zero points
-ONE = 1,																// one cards are one point
-TWO = 2,																// two cards are two points 
-THREE = 3,																// three cards are three points
-FOUR = 4,																// four cards are four points
-FIVE = 5,																// five cards are five points
-SIX = 6,																// six cards are six points
-SEVEN = 7,																// seven card are seven points
-EIGHT = 8,																// eight cards are eight points
-NINE = 9,																// nine cards are nine points
-REVERSE = 20,															// any action cards are 20 points
-SKIP = 20,					
+ZERO = 0,				// zero cards are zero points
+ONE = 1,				// one cards are one point
+TWO = 2,				// two cards are two points 
+THREE = 3,				// three cards are three points
+FOUR = 4,				// four cards are four points
+FIVE = 5,				// five cards are five points
+SIX = 6,				// six cards are six points
+SEVEN = 7,				// seven card are seven points
+EIGHT = 8,				// eight cards are eight points
+NINE = 9,				// nine cards are nine points
+REVERSE = 20,			// any action cards are 20 points
+SKIP = 20,
 DRAWTWO = 20,
-WILDCARD = 50,															// wild cards are 50 points
-DRAWFOUR = 50															// wild draw 4's are 50 points
+WILDCARD = 50,			// wild cards are 50 points
+DRAWFOUR = 50			// wild draw 4's are 50 points
 };
-enum Action {Act_None, Act_Reverse, Act_Skip, Act_Draw2, Act_Wild, Act_WildDraw4};
-// Act_None continues to increment/decrement player turns
-// Act_Reverse switches "bool reverse" value to increment turns in the opposite direction
-// Act_Skip sets "bool skip" to true, skips player's turn, and turns "bool skip" back to false
-// Act_Draw2 puts two more cards in the next player's hand, sets "bool skip" to true, skips next player's turn, and turns "bool skip" back to false
-// Act_Wild asks the player which color they would like to chage the deck to and changes playable cards to that color
-// Act_WildDraw4 asks the player which color they would like to chage the deck to and changes playable cards to that color
-	// Act_WildDraw4 then puts four more cards in the next player's hand, sets "bool skip" to true, skips next player's turn
+enum Action {Act_None, Act_Reverse, Act_Skip, Act_Draw2, Act_Wild, Act_WildDraw4};	
+	/*	differentiates different cards (in the "Value" object, there are multiple cards that have
+		the same value, the program would read them as the same card because they have the same
+		point value, hence, a new enummeration "Action" is created)
+	*/
 class Card {
     //FIELDS
     private:
@@ -52,18 +49,18 @@ class Card {
             color = hold;
 			action = act;
         };
-        Value GetValue(){												// note to self** getter method- returns private data stored in an object's member variables
+        Value GetValue(){							// getter method- returns private data stored in an object's member variables
             return value;
         };
         Color GetColor(){
-            return color;												// if color is the same or is WILD, continue
+            return color;							// if color is the same or is WILD, continue
         };
 		Action GetAction(){
 			return action;
 		};
 	string WhatCardIsThis(){
 		string cardName;
-		if(this->GetColor() == RED){									// interperet card's values
+		if(this->GetColor() == RED){				// interperet card's values
 			cardName = "red ";
 		}	else if(this->GetColor() == YELLOW){
     			cardName = "yellow ";
@@ -86,44 +83,45 @@ class Card {
 		}	else{
 				cardName += to_string(this->GetValue());
   }
-  return cardName;														// return a string with card name
+  return cardName;												// return a string with card name
 }
 	bool CanCardBePlayed(Card topCard, Card playedCard){
+		// if you play a card that has the same color/number OR is a wild card 
 		if ((playedCard.GetColor() == topCard.GetColor()) || ((playedCard.GetValue() == topCard.GetValue()) && playedCard.GetAction() == topCard.GetAction()) || (topCard.GetColor() == WILD)){
-			// if you play a card that has the same color/number OR is a wild card 
-			return true;																	// then the card CAN be played
+			return true;										// then the card CAN be played
 		}
 		else {
 			cout << "You cannot play that card, try again (check your spelling and use all lowercase letters)" ;
 		// card is not a valid card
-			return false;																// card cannot be played	
+			return false;										// card cannot be played	
 		}
 	}
 };
 
 class Player{
 	private:
-	  vector<Card> hand;										// player's hand
-	  int points;												// player's points
-	  string plyrName;											// player's name
+	  vector<Card> hand;		// player's hand
+	  int points;				// player's points
+	  string plyrName;			// player's name
 	
 	public:
-  Player(string name){
+	Player(string name){
     plyrName = name;
     points = 0;
   }
 	
-  vector<Card> GetHand(){																// creates object holding hand vectors
+  vector<Card> GetHand(){		// creates object holding hand vectors
 		return hand;
 	} 
 
-	int GetPoints(){																// creates object holding player points
-		return points;												// create a vector the size of player amount
-	}								                        // players are offset (playerPoints.at(0) is the first player and so on)
+	int GetPoints(){			// creates object holding player points
+		return points;			// create a vector the size of player amount
+	}							// reminder** players are offset (playerPoints.at(0) is the first player and so on)
 
 	void CalculatePoints() {
 		// For loop removing top card from hand, add card's points to "points".
 		// This will clear the player hand and keep track of points.
+		// FIXME how do i do this???
 	}
 
   string GetName(){
@@ -196,17 +194,17 @@ class Deck{
 		
 		vector<Card> shuffled;
 		for (int i = 1; i <= 108; ++i){
-			int index = rand() % cards.size();								// Get a random card from the deck (program component: random number generator)
+			int index = rand() % cards.size();							// Get a random card from the deck (program component: random number generator)
 
 			shuffled.push_back(cards.at(index));
-			cards.erase(cards.begin() + index);								// remove the card from the deck once it's been chosen by erasing card from deck
+			cards.erase(cards.begin() + index);							// remove the card from the deck once it's been chosen by erasing card from deck
 		}
-		cards = shuffled;													// set cards vector equal to shuffled deck vector
+		cards = shuffled;												// set cards vector equal to shuffled deck vector
 	}
 	Card Draw(){														// draw the top card off the now shuffled cards deck
-		if (cards.size() == 0){										// if there are no cards left in the deck 
+		if (cards.size() == 0){											// if there are no cards left in the deck 
 			Card topCard = discardPile.back();							// sans top card
-			discardPile.pop_back();									// shuffle and use discard pile as deck to draw from
+			discardPile.pop_back();										// shuffle and use discard pile as deck to draw from
 			int numCards = discardPile.size();
 				for (int i = 0; i < numCards ; ++i){
 				int index = rand() % discardPile.size();								
@@ -218,21 +216,28 @@ class Deck{
 			discardPile.push_back(topCard);
 		}
 		Card n = cards.back();
-		cards.pop_back();													// card is removed from deck vector
+		cards.pop_back();												// card is removed from deck vector
 		return n;														// return card value
 	}
 	vector<Card> GetDeck(){
 		return cards;
 	}
-	void DrawMulti(Player temp, int drawAmount){					// pass the player being drawn to and the amount of cards drawn
-		for (int i = drawAmount; i > 0; --i){						// everytime you want to draw a card
+	void DrawMulti(Player temp, int drawAmount){						// pass the player being drawn to and the amount of cards drawn
+		for (int i = drawAmount; i > 0; --i){							// everytime you want to draw a card
 			temp.AddCard(Draw());
 		}
 	}
 };
 
+// draw cards function
+void DrawMulti(Player temp, int drawAmount){
+	for (int drawAmount; drawAmount > 0 ; --drawAmount){
+		temp.at(playerTurn).AddCard(Draw());
+	}
+}
+
 bool ReverseCardPlayed(Player currentPlayer, Card topCard){
-	if (topCard.GetValue() == REVERSE){										// a reverse card was played (if true is returned, !reverse;)
+	if (topCard.GetValue() == REVERSE){									// a reverse card was played (if true is returned, !reverse;)
 		return true;
 	}
 	else {																// a reverse card was not played
@@ -241,7 +246,7 @@ bool ReverseCardPlayed(Player currentPlayer, Card topCard){
 }
 
 bool SkipCardPlayed(Player currentPlayer, Card topCard){
-	if (topCard.GetValue() == SKIP){											// a skip card was played
+	if (topCard.GetValue() == SKIP){									// a skip card was played
 		return true;
 	}
 	else {																// a skip card was not played
@@ -249,17 +254,18 @@ bool SkipCardPlayed(Player currentPlayer, Card topCard){
 	}
 }
 
-void DrawTwoCards(Player nextPlater, int index, Card topCard){
+void DrawTwoCards(Player currentPlayer, int index, Card topCard, bool skipPlayer){
 	if (topCard.GetValue() == DRAWTWO){
-		// FIXME draw two cards
-		// add them to next players hand
+		int drawAmount = 2;										//	make draw amount 2 (draw 2)
+		DrawMulti(currentPlayer.at(index +1), drawAmount);		// draw 2 cards and put them in the next player's hand
+		bool skipPlayer = true;									// you now want to skip the next player's turn								
 	}
 }
 
-void WildCardPlayed(Card topCard){
+void WildCardPlayed(Card topCard, bool skipPlayer){
 	string cardColorPlayed;
 	bool colorWrong = true;
-	if (topCard.GetColor() == WILD){		// regular wildcard is played
+	if (topCard.GetColor() == WILD){	// regular wildcard is played
 		while (colorWrong == true){
 			cout << "What color would you like to change to (red, green, yellow, or blue): ";
 			cin >> cardColorPlayed;
@@ -273,11 +279,12 @@ void WildCardPlayed(Card topCard){
 		}
 	}
 	if (topCard.GetValue() == DRAWFOUR){
-		// FIXME draw four cards
-		// add them to next player's hand
-		// FIXME change deck to allow that card color to be played
-		// FIXME increment player turn
-	}
+		if (topCard.GetValue() == DRAWFOUR){
+		int drawAmount = 4;										// make draw amount 4 (draw 4)
+		DrawMulti(currentPlayer.at(index +1), drawAmount);		// draw 4 cards and put them in the next player's hand
+		bool skipPlayer = true;									// you now want to skip the next player's turn								
+		}
+	}	
 }
 
 // What are the player's names
@@ -290,18 +297,11 @@ void GetPlayerNames(vector<Player>& players){
 		cin >> playerAmount;
 	}
 	if ((playerAmount >= 2) || (playerAmount <= 10)){
-		for (int i = 0; i <  playerAmount; ++i){									// playerAmount is number of players
-			cout << "Please enter player " << i + 1 << "'s name: ";					//ask user for their name
-			cin >> plyrName;													//get user input
-			players.push_back(Player(plyrName));								//each name entered goes into the vector (element 0 is player 1)
+		for (int i = 0; i <  playerAmount; ++i){							// playerAmount is number of players
+			cout << "Please enter player " << i + 1 << "'s name: ";			//ask user for their name
+			cin >> plyrName;												//get user input
+			players.push_back(Player(plyrName));							//each name entered goes into the vector (element 0 is player 1)
 		}
-	}
-}
-
-// draw cards function
-void DrawMulti(Player temp, int drawAmount){
-	for (int drawAmount; drawAmount > 0 ; --drawAmount){
-		temp.at(playerTurn).AddCard(Draw());
 	}
 }
 
@@ -309,15 +309,16 @@ void DrawMulti(Player temp, int drawAmount){
 void PlayerHasZeroCards(Player currentPlayer, Card topCard){
 	string checkUno;
   // if currentplayers hand.size == 0
-      cout << "You have no more cards, type \"UNO\" : ";
-      cin >> checkUno;
-      if ((checkUno == "UNO") || (checkUno == "uno") || (checkUno == "Uno")){
-	  cout << currentPlayer.GetName() << " has UNO!" << endl;				// Winner's name is output
-			// look at points notes, all of the cards in each players hand are made into points and added to the round winner's points- the game continues  
+	cout << "You have no more cards, type \"UNO\" : ";
+	cin >> checkUno;
+		if ((checkUno == "UNO") || (checkUno == "uno") || (checkUno == "Uno")){
+			cout << currentPlayer.GetName() << " has UNO!" << endl;			// Winner's name is output
+		// reminder** all of the cards in each players hand are made into points and added to the round winner's points- the game continues  
 		}
 		else{
 			cout << "You did not say \"UNO\", 2 cards have been added to your hand."<< endl;
-			//FIXME add two cards to players hand
+			int add2Cards = 2;
+			DrawMulti(currentPlayer, add2Cards);
 		}
 }
 
@@ -375,7 +376,7 @@ void OutputRules(){
 	
 int main(){
 
-// variables											// the card on top of the stack has to be drawn at a later point because it cant be defined empty. (Card topCard)
+// variables
 vector<Player> players;
 Deck deck_of_cards;
 int cardsDrawn = 0;										// 1 2 4
@@ -383,7 +384,8 @@ bool playerWins = false;
 srand(time(NULL));										// shuffled deck contains a random seed based off time of day (to ensure completely random cards every game)
 string playedCard;										// card the user plays
 bool goodCard = false;
- 
+bool goodHand = false;
+int incrOrDecr = 0;										// increment or decrement value (set later in the code)
 	
 // output for rules of the game
 OutputRules();
@@ -392,9 +394,6 @@ OutputRules();
 	deck_of_cards.shuffle();
 	Card topCard = deck_of_cards.GetDeck().at(0);						// card on top of the deck declared
 	
-	// top card is output (each turn increment will remind player's of the topcard)
-								// seven cards are dealt to each players's hand
-
 // What are the player's names and how many players are playing
 	GetPlayerNames(players);						// function that allows players to input # of players and player names
 	
@@ -407,10 +406,7 @@ OutputRules();
 	cout << endl;
 	}
 
-	// if player has no playable cards in their hand, draw ONE card then go to the next player
-	// else if - the player can play a card
-
-
+// Gameplay while loop
 	while (PlayerHas500Points() == 0){							// if function returns zero, game is not over
 		for (int playerTurn = 0; playerTurn < players.size(); ++playerTurn){
 			cout << "It is " << players.GetName().at(playerTurn) << "'s turn" << endl;
@@ -418,51 +414,67 @@ OutputRules();
 				for (int j = 0; j < players.GetHand().size(); ++j){
 					cout << players.at(playerTurn).GetHand().at(j).WhatCardIsThis() << ", ";	// display player's hand
 				}
-			cout << "What card would you like to play?";
-			topCard = discardPile.at(0).GetCard().at(0).WhatCardIsThis();		// declare topcard
-			while (goodCard == false){                                       // if card can be played, put it in discard pile vector
-				cin << playedCard;                                             // player plays card 
-		// FIXME	"playedCard" is a string which you need to turn into a card object
-				goodCard = (CanCardBePlayed(topCard, playedCard)) ;             // calls function with parameter topCard
-            }          						  // if card cant be played try again
-			discardPile.push_front(playedCard);					// put played card on top of discard pile
+			for (int i = 0; i < players.GetHand().size(); ++i){							// checks to see if player has any playable cards
+				if (CanCardsBePlayed(topCard, players.GetHand().at(i)) == true){
+					goodHand = true;
+				}
+			}
+			if (goodHand == true){											// player has at least one valid card in their hand	
+				cout << "You have at least one playable card in your hand, what card would you like to play?";
+				topCard = discardPile.at(0).GetCard().at(0).WhatCardIsThis();		// declare topcard
+				while (goodCard == false){                                       // if card can be played, put it in discard pile vector
+					cin << playedCard;                                             // player plays card 
+			// FIXME	"playedCard" is a string which you need to turn into a card object
+					goodCard = (CanCardBePlayed(topCard, playedCard)) ;             // calls function with parameter topCard
+				}          						  // if card cant be played try again
+				discardPile.push_front(playedCard);					// put played card on top of discard pile
 
-	// reverse card function		
-			if ( (ReverseCardPlayed(players.at(playerTurn), topCard)) == true){
-				reverse = !reverse;						// reverse card played (1)
-			}
-			else{
-				reverse = reverse;						// reverse card not played (0)
-			}
+		// reverse card function		
+				if ( (ReverseCardPlayed(players.at(playerTurn), topCard)) == true){
+					reverse = !reverse;						// reverse card played (1)
+				}
+				else{
+					reverse = reverse;						// reverse card not played (0)
+				}
 
-			if (reverse == 1){							
-				plyrMotion = true;						// player motion is now counterclockwise
-			}
-			else {
-				plyrMotion = false;
-			}	
-	// skip card function		
-			if ((SkipCardPlayed(players.at(playerTurn), topCard)) == true){
-				skip = true;
-			}
-	// draw 2 function
-			
-	// wildcard function
-			WildCardPlayed(topCard);
+				if (reverse == 1){							
+					plyrMotion = true;
+				}
+				else {
+					plyrMotion = false;
+				}	
+		// skip card function		
+				if ((SkipCardPlayed(players.at(playerTurn), topCard)) == true){
+					skip = true;
+				}
+		// draw 2 function
+				DrawTwoCards(players, playerTurn, topCard, skip);
+		// wildcard function
+				WildCardPlayed(topCard, skip);
+		}
+		else if {		// player has no playable cards
+			cout << "You have no playable cards in your hand." << endl << "A card has automatically been drawn for you and your turn will be skipped." << endl; 
+			cardsDrawn = 1; 				// sets amount of cards to be drawn equal to 1
+			DrawMulti(players, cardsDrawn);
+			skip = true; 						// skip that player's turn after they draw a card
+		}	
 	// winning parameter functions called
 			PlayerHasZeroCards(players, topCard);			
-	// turn increments/decrements								// FIXME increment and decrements to non valid players rn
+	// turn increments/decrements	
 			if ((plyrMotion == true) && (skip == false)){
-				playerTurn = (playerTurn - 1) % playerAmount;					// counterclockwise player movement (next valid player)
-			}	else if ((plyrMotion == true) && (skip == true)) {
+				playerTurn = (playerTurn - 1) % playerAmount;			// counterclockwise player movement (next valid player)
+			}			
+			else if ((plyrMotion == false) && (skip == false)){
+					playerTurn = (playerTurn + 1) % playerAmount;		// clockwise player movement (next valid player)
+			}
+			else if ((plyrMotion == true) && (skip == true)) {
 					playerTurn = (playerTurn - 2) % playerAmount;
-					skip = false;												//	set skip back to false
-			}	else if ((plyrMotion == false) && (skip == false)){
-					playerTurn = (playerTurn + 1) % playerAmount;			// clockwise player movement (next valid player)
-			}	else if ((plyrMotion == false) && (skip == true)){
+					skip = false;										//	set skip back to false
+			}	
+			else if ((plyrMotion == false) && (skip == true)){
 					playerTurn = (playerTurn + 2) % playerAmount;
 					skip = false;										// set skip back to false
-			}
+			}			
 		}	
 	}	// end of while loop code
 
