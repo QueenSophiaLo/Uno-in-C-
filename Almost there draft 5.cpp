@@ -13,7 +13,6 @@ int currDeckSize = 108;							// 108 cards in the deck (starts with 108 cards)
 int playerAmount;								// amount of players playing the game
 int playerTurn;									// is incremented or decremented to show player's turn
 
-
 enum Color {RED, YELLOW, GREEN, BLUE, WILD};
 enum Value {
 ZERO = 0,				// zero cards are zero points
@@ -117,11 +116,17 @@ class Player{
 	int GetPoints(){			// creates object holding player points
 		return points;			// create a vector the size of player amount
 	}							// reminder** players are offset (playerPoints.at(0) is the first player and so on)
-
-	void CalculatePoints() {
-		// For loop removing top card from hand, add card's points to "points".
-		// This will clear the player hand and keep track of points.
-		// FIXME how do i do this???
+	void AddPoints(int num) {
+		points += num;
+	}
+	int CalculatePoints(Player currentPlayer) {
+		int total = 0;
+		int numCards = currentPlayer.size();
+		for (int i = 0; i < numCards; ++i){								// For loop removing top card from hand, add card's points to "points"
+			total += currentPlayer.at(i).GetHand().back().GetValue();	// This will clear the player's hand and keep track of points
+			currentPlayer.GetHand.pop_back();
+		}
+		return total;
 	}
 
   string GetName(){
@@ -298,17 +303,25 @@ void GetPlayerNames(vector<Player>& players){
 	}
 	if ((playerAmount >= 2) || (playerAmount <= 10)){
 		for (int i = 0; i <  playerAmount; ++i){							// playerAmount is number of players
-			cout << "Please enter player " << i + 1 << "'s name: ";			//ask user for their name
-			cin >> plyrName;												//get user input
-			players.push_back(Player(plyrName));							//each name entered goes into the vector (element 0 is player 1)
+			cout << "Please enter player " << i + 1 << "'s name: ";			// ask user for their name
+			cin >> plyrName;												// get user input
+			players.push_back(Player(plyrName));							// each name entered goes into the vector (element 0 is player 1)
 		}
 	}
 }
 
 // ending parameters
+bool PlyrsHaveCardsRemaining(Player currentPlayer, int playerAmount){
+	for (int i = 0; i < playerAmount; ++i){
+		if (currentPlayer.GetHand().size() == 0){	// if current player's hand size is 0
+			return 0;							
+		}
+	return true;
+	}
+
 void PlayerHasZeroCards(Player currentPlayer, Card topCard){
-	string checkUno;
-  // if currentplayers hand.size == 0
+	if (currentPlayer.GetHand().size() == 0){		// checks to see if player has zero cards (not the loop that checks if all players
+	string checkUno;								// have zero cards becuase there is a possibility that two cards can be added to that player's hand
 	cout << "You have no more cards, type \"UNO\" : ";
 	cin >> checkUno;
 		if ((checkUno == "UNO") || (checkUno == "uno") || (checkUno == "Uno")){
@@ -320,6 +333,7 @@ void PlayerHasZeroCards(Player currentPlayer, Card topCard){
 			int add2Cards = 2;
 			DrawMulti(currentPlayer, add2Cards);
 		}
+	}
 }
 
 int PlayerHas500Points(){
@@ -389,97 +403,90 @@ int incrOrDecr = 0;										// increment or decrement value (set later in the c
 	
 // output for rules of the game
 OutputRules();
-	
-// shuffle the deck
-	deck_of_cards.shuffle();
-	Card topCard = deck_of_cards.GetDeck().at(0);						// card on top of the deck declared
-	
 // What are the player's names and how many players are playing
-	GetPlayerNames(players);						// function that allows players to input # of players and player names
+GetPlayerNames(players);
 	
-	for ( int i = 0; i < playerAmount; ++i){
-		cout << players.at(i).GetName() << "'s cards are; " ;				// outputs players' names
-		for (int j = 0; j < 7 ; ++j){										// draw 7 cards
-			players.at(i).AddCard(deck_of_cards.Draw());					// make filling player hands a seperate function (don't put it in main)
-			cout << players.at(i).GetHand().at(j).WhatCardIsThis() << ", ";	// output hand 
-		} 	
-	cout << endl;
-	}
-
 // Gameplay while loop
-	while (PlayerHas500Points() == 0){							// if function returns zero, game is not over
-		for (int playerTurn = 0; playerTurn < players.size(); ++playerTurn){
-			cout << "It is " << players.GetName().at(playerTurn) << "'s turn" << endl;
-			cout << "Top card is " << discardPile.at(0).GetCard().at(0).WhatCardIsThis() << " ." << endl << "Player Hand contains: " 
-				for (int j = 0; j < players.GetHand().size(); ++j){
-					cout << players.at(playerTurn).GetHand().at(j).WhatCardIsThis() << ", ";	// display player's hand
-				}
-			for (int i = 0; i < players.GetHand().size(); ++i){							// checks to see if player has any playable cards
-				if (CanCardsBePlayed(topCard, players.GetHand().at(i)) == true){
-					goodHand = true;
-				}
-			}
-			if (goodHand == true){											// player has at least one valid card in their hand	
-				cout << "You have at least one playable card in your hand, what card would you like to play?";
-				topCard = discardPile.at(0).GetCard().at(0).WhatCardIsThis();		// declare topcard
-				while (goodCard == false){                                       // if card can be played, put it in discard pile vector
-					cin << playedCard;                                             // player plays card 
-			// FIXME	"playedCard" is a string which you need to turn into a card object
-					goodCard = (CanCardBePlayed(topCard, playedCard)) ;             // calls function with parameter topCard
-				}          						  // if card cant be played try again
-				discardPile.push_front(playedCard);					// put played card on top of discard pile
-
-		// reverse card function		
-				if ( (ReverseCardPlayed(players.at(playerTurn), topCard)) == true){
-					reverse = !reverse;						// reverse card played (1)
-				}
-				else{
-					reverse = reverse;						// reverse card not played (0)
-				}
-
-				if (reverse == 1){							
-					plyrMotion = true;
-				}
-				else {
-					plyrMotion = false;
-				}	
-		// skip card function		
-				if ((SkipCardPlayed(players.at(playerTurn), topCard)) == true){
-					skip = true;
-				}
-		// draw 2 function
-				DrawTwoCards(players, playerTurn, topCard, skip);
-		// wildcard function
-				WildCardPlayed(topCard, skip);
+	while (PlayerHas500Points() == 0){					// if function returns zero, game is not over
+// shuffle the deck
+		deck_of_cards.shuffle();
+			// deal cards to players
+			// todo
+		Card topCard = deck_of_cards.GetDeck().at(0);	// card on top of the deck declared
 		}
-		else if {		// player has no playable cards
-			cout << "You have no playable cards in your hand." << endl << "A card has automatically been drawn for you and your turn will be skipped." << endl; 
-			cardsDrawn = 1; 				// sets amount of cards to be drawn equal to 1
-			DrawMulti(players, cardsDrawn);
-			skip = true; 						// skip that player's turn after they draw a card
-		}	
-	// winning parameter functions called
-			PlayerHasZeroCards(players, topCard);			
-	// turn increments/decrements	
-			if ((plyrMotion == true) && (skip == false)){
-				playerTurn = (playerTurn - 1) % playerAmount;			// counterclockwise player movement (next valid player)
-			}			
-			else if ((plyrMotion == false) && (skip == false)){
-					playerTurn = (playerTurn + 1) % playerAmount;		// clockwise player movement (next valid player)
-			}
-			else if ((plyrMotion == true) && (skip == true)) {
-					playerTurn = (playerTurn - 2) % playerAmount;
-					skip = false;										//	set skip back to false
-			}	
-			else if ((plyrMotion == false) && (skip == true)){
-					playerTurn = (playerTurn + 2) % playerAmount;
-					skip = false;										// set skip back to false
-			}			
-		}	
-	}	// end of while loop code
+		while (PlyrsHaveCardsRemaining(players, playerAmount) == true){
+			for (int playerTurn = 0; playerTurn < players.size(); ++playerTurn){
+				cout << "It is " << players.GetName().at(playerTurn) << "'s turn" << endl;
+				cout << "Top card is " << discardPile.at(0).GetCard().at(0).WhatCardIsThis() << " ." << endl << "Player Hand contains: " 
+					for (int j = 0; j < players.GetHand().size(); ++j){
+						cout << players.at(playerTurn).GetHand().at(j).WhatCardIsThis() << ", ";	// display player's hand
+					}
+				for (int i = 0; i < players.GetHand().size(); ++i){							// checks to see if player has any playable cards
+					if (CanCardsBePlayed(topCard, players.GetHand().at(i)) == true){
+						goodHand = true;
+					}
+				}
+				if (goodHand == true){												// player has at least one valid card in their hand	
+					cout << "You have at least one playable card in your hand, what card would you like to play?";
+					topCard = discardPile.at(0).GetCard().at(0).WhatCardIsThis();	// declare topcard
+					while (goodCard == false){                                      // if card can be played, put it in discard pile vector
+						cin << playedCard;                                          // player plays card 
+				// FIXME	"playedCard" is a string which you need to turn into a card object
+						goodCard = (CanCardBePlayed(topCard, playedCard)) ;         // calls function with parameter topCard
+					}          														// if card cant be played try again
+					discardPile.push_front(playedCard);			// put played card on top of discard pile
 
+			// reverse card function		
+					if ( (ReverseCardPlayed(players.at(playerTurn), topCard)) == true){
+						reverse = !reverse;						// reverse card played (1)
+					}
+					else{
+						reverse = reverse;						// reverse card not played (0)
+					}
+
+					if (reverse == 1){							
+						plyrMotion = true;
+					}
+					else {
+						plyrMotion = false;
+					}	
+			// skip card function		
+					if ((SkipCardPlayed(players.at(playerTurn), topCard)) == true){
+						skip = true;
+					}
+			// draw 2 function
+					DrawTwoCards(players, playerTurn, topCard, skip);
+			// wildcard function
+					WildCardPlayed(topCard, skip);
+			}
+			else if {			// player has no playable cards
+				cout << "You have no playable cards in your hand." << endl << "A card has automatically been drawn for you and your turn will be skipped." << endl; 
+				cardsDrawn = 1; // sets amount of cards to be drawn equal to 1
+				DrawMulti(players, cardsDrawn);
+				skip = true; 	// skip that player's turn after they draw a card
+			}	
+			// winning parameter functions called
+				PlayerHasZeroCards(players, topCard);			
+			// turn increments/decrements	
+				if ((plyrMotion == true) && (skip == false)){
+					playerTurn = (playerTurn - 1) % playerAmount;			// counterclockwise player movement (next valid player)
+				}			
+				else if ((plyrMotion == false) && (skip == false)){
+						playerTurn = (playerTurn + 1) % playerAmount;		// clockwise player movement (next valid player)
+				}
+				else if ((plyrMotion == true) && (skip == true)) {
+						playerTurn = (playerTurn - 2) % playerAmount;
+						skip = false;										//	set skip back to false
+				}	
+				else if ((plyrMotion == false) && (skip == true)){
+						playerTurn = (playerTurn + 2) % playerAmount;
+						skip = false;										// set skip back to false
+				}			
+			}	
+		}
+		//todo: calculate points, add points to players, 
+	}	// end of while loop code
 // print out scores and winners	
 	WhoWins();										
 	return 0;
 }	// end of int main 															   
-
