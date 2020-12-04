@@ -1,39 +1,8 @@
-
-Skip to content
-Using UNC Charlotte Mail with screen readers
-1 of 90
-github link for code
-Inbox
-Sophia Godfrey
-	
-	Thu, Dec 3, 11:38 PM (15 hours ago)
-https://github.com/QueenSophiaLo/Uno-in-C-
-Steve Godfrey
-	
-Attachments2:39 PM (7 minutes ago)
-	
-to me
-[Caution: Email from External Sender. Do not click or open links or attachments unless you know this sender.]
- 
+/*
 This works for far, but I have not gone to 500 points yet.  To test that, you could
 lower the number of points to 50 or something,   To test going out, I lowered the
 number of cards to 2 for the initial deal.
-
-have fun.
-
-On Thursday, December 3, 2020, 11:38:31 PM EST, Sophia Godfrey <sgodfr13@uncc.edu> wrote:
-
-
-https://github.com/QueenSophiaLo/Uno-in-C-
-
-Attachments area
-	
-Thank you!
-Awesome, thanks!
-Thanks, I'll check it out.
-	
-	
-
+*/
 #include <iostream>
 #include <vector>
 #include <cstdlib>
