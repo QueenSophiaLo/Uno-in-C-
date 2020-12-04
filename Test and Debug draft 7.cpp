@@ -3,6 +3,7 @@ This works for far, but I have not gone to 500 points yet.  To test that, you co
 lower the number of points to 50 or something,   To test going out, I lowered the
 number of cards to 2 for the initial deal.
 */
+// huge thanks to Bryant Collins and Stephen Godfrey for helping me out
 #include <iostream>
 #include <vector>
 #include <cstdlib>
