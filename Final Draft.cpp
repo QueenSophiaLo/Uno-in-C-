@@ -7,11 +7,11 @@ using namespace std;
 // Global Variables
 bool plyrMotion = false;	// false is clockwise player motion and vis versa
 int reverse = 0;
-bool skip = false;			// skip used for action cards to skip player's turns
+bool skip = false;		// skip used for action cards to skip player's turns
 int skipBool = 0;
 int currDeckSize = 112;		// 112 cards in the deck (starts with 112 cards)
-int playerAmount;			// amount of players playing the game
-int playerTurn;				// is incremented or decremented to show player's turn
+int playerAmount;		// amount of players playing the game
+int playerTurn;			// is incremented or decremented to show player's turn
 int handWinner;	
 string cardColorPlayed;
 
@@ -19,16 +19,16 @@ string cardColorPlayed;
 enum Color {RED, YELLOW, GREEN, BLUE, WILD, NOCOLOR};
 // this enum is card value consisting of the card numbers/action card names
 enum Value {
-ZERO = 0,		// zero cards are zero points
-ONE = 1,		// one cards are one point
-TWO = 2,		// two cards are two points 
-THREE = 3,		// three cards are three points
-FOUR = 4,		// four cards are four points
-FIVE = 5,		// five cards are five points
-SIX = 6,		// six cards are six points
-SEVEN = 7,		// seven card are seven points
-EIGHT = 8,		// eight cards are eight points
-NINE = 9,		// nine cards are nine points
+ZERO = 0,	// zero cards are zero points
+ONE = 1,	// one cards are one point
+TWO = 2,	// two cards are two points 
+THREE = 3,	// three cards are three points
+FOUR = 4,	// four cards are four points
+FIVE = 5,	// five cards are five points
+SIX = 6,	// six cards are six points
+SEVEN = 7,	// seven card are seven points
+EIGHT = 8,	// eight cards are eight points
+NINE = 9,	// nine cards are nine points
 REVERSE = 20,	// any action cards are 20 points
 SKIP = 21,
 DRAWTWO = 22,
@@ -72,7 +72,7 @@ class Card {
 			action = act;
         };
         Value GetValue() {	// getter method- returns private data stored in an object's member variables
-            return value;   // this returns the value of a card (the value is the private data)
+            return value;	// this returns the value of a card (the value is the private data)
         };
         int GetCardPoints() {
         	if (value >= 50)
@@ -128,11 +128,11 @@ class Card {
   return cardName;  // return a string with card name
 }
 	bool CanCardBePlayed(Card topCard, bool Played) {
-		// if you play a card that has the same color/number OR is a wild card 
+	// if you play a card that has the same color/number OR is a wild card 
 		if ((this->GetColor() == topCard.GetColor()) || ((this->GetValue() == topCard.GetValue()) && this->GetAction() == topCard.GetAction()) || (this->GetColor() == WILD)) {
 			return true;	// then the card CAN be played
 		}
-		// Wildcard is on top, check color
+	// Wildcard is on top, check color
 		else if ((topCard.isWildCard() || topCard.isWildDraw4()) && (this->GetColor() == StrToColor(cardColorPlayed))) {
 			return true;	// then the card CAN be played
 		}
@@ -150,8 +150,8 @@ class Player {
 	private:    // The class members declared as private can be accessed only by the functions inside the class
 	            // cannot be accessed by any function or object outside of the "Player" class
 	  vector<Card> hand;	// player's hand
-	  int points;			// player's points
-	  string plyrName;		// player's name
+	  int points;		// player's points
+	  string plyrName;	// player's name
 	
 	public:     //  public members of a class can be accessed anywhere in the program using a "." (otherwise known as the direct member
 	            // operator) with the object of that specific class
@@ -167,7 +167,7 @@ class Player {
 
 	int GetPoints() {	// creates object holding player points
 		return points;	// create a vector the size of player amount
-	}					// reminder** players are offset (playerPoints.at(0) is the first player and so on)
+	}	// reminder** players are offset (playerPoints.at(0) is the first player and so on)
 	void AddPoints(int num) {
 		points += num;
 	}
@@ -203,20 +203,20 @@ class Deck {    // creating the deck
 	public:
 	void Reset() {
 		for(int h = 0; h < 2; h++) {	// creates two versions of each card
-			cards.push_back(Card(RED, REVERSE, Act_Reverse)); 		// red 0
+			cards.push_back(Card(RED, REVERSE, Act_Reverse)); 	// red 0
 			cards.push_back(Card(YELLOW, REVERSE, Act_Reverse));	// yellow 0
-			cards.push_back(Card(GREEN, REVERSE, Act_Reverse));		// green 0
-			cards.push_back(Card(BLUE, REVERSE, Act_Reverse));		// blue 0
+			cards.push_back(Card(GREEN, REVERSE, Act_Reverse));	// green 0
+			cards.push_back(Card(BLUE, REVERSE, Act_Reverse));	// blue 0
 
-			cards.push_back(Card(RED, SKIP, Act_Skip)); 			// red skip
-			cards.push_back(Card(YELLOW, SKIP, Act_Skip));			// yellow skip
-			cards.push_back(Card(GREEN, SKIP, Act_Skip));			// green skip
-			cards.push_back(Card(BLUE, SKIP, Act_Skip));			// blue skip
+			cards.push_back(Card(RED, SKIP, Act_Skip)); 		// red skip
+			cards.push_back(Card(YELLOW, SKIP, Act_Skip));		// yellow skip
+			cards.push_back(Card(GREEN, SKIP, Act_Skip));		// green skip
+			cards.push_back(Card(BLUE, SKIP, Act_Skip));		// blue skip
 
-			cards.push_back(Card(RED, DRAWTWO, Act_Draw2)); 		// red draw 2
-			cards.push_back(Card(YELLOW, DRAWTWO, Act_Draw2));		// yellow draw 2
-			cards.push_back(Card(GREEN, DRAWTWO, Act_Draw2));		// green draw 2
-			cards.push_back(Card(BLUE, DRAWTWO, Act_Draw2));		// blue draw 2
+			cards.push_back(Card(RED, DRAWTWO, Act_Draw2)); 	// red draw 2
+			cards.push_back(Card(YELLOW, DRAWTWO, Act_Draw2));	// yellow draw 2
+			cards.push_back(Card(GREEN, DRAWTWO, Act_Draw2));	// green draw 2
+			cards.push_back(Card(BLUE, DRAWTWO, Act_Draw2));	// blue draw 2
 			}	
 
 		for(int j=0; j < 2; j++) {	// creates two versions of each card
@@ -248,8 +248,8 @@ class Deck {    // creating the deck
 		cout << endl << "...Shuffle deck" << endl;
 		
 		vector<Card> shuffled;
-		// warning: if there are less than 112 cards, this does not work.  Reset 
-		// function will reset the deck.
+		// warning: if there are less than 112 cards, this does not work
+		// Reset function will reset the deck.
 		for (int i = 1; i <= 112; ++i) {
 			int index = rand() % cards.size();  // Get a random card from the deck (program component: random number generator)
 
@@ -265,7 +265,6 @@ class Deck {    // creating the deck
 			int numCards = discardPile.size();
 				for (int i = 0; i < numCards ; ++i) {
 				int index = rand() % discardPile.size();								
-
 				cards.push_back(discardPile.at(index));
 				discardPile.erase(discardPile.begin() + index);
 				}
@@ -314,8 +313,8 @@ void DrawTwoCards(vector<Player> Players, int index, Card topCard, bool &skipPla
 		else
 			nextPlayer = (index + 1) % Players.size();
 
-		deck.DrawMulti(Players.at(nextPlayer), drawAmount); // draw 2 cards and put them in the next player's hand
-		skipPlayer = true;									                // you now want to skip the next player's turn								
+		deck.DrawMulti(Players.at(nextPlayer), drawAmount);	// draw 2 cards and put them in the next player's hand
+		skipPlayer = true;					// you now want to skip the next player's turn								
 	}
 }
 
@@ -348,7 +347,7 @@ void WildCardPlayed(Card topCard, bool &skipPlayer, Deck& deck, vector<Player> P
 			nextPlayer = (index + 1) % Players.size();
 
 		deck.DrawMulti(Players.at(nextPlayer), drawAmount);	// draw 4 cards and put them in the next player's hand
-		skipPlayer = true;									                // you now want to skip the next player's turn								
+		skipPlayer = true;					// you now want to skip the next player's turn								
 		}
 	}	
 }
@@ -356,14 +355,14 @@ void WildCardPlayed(Card topCard, bool &skipPlayer, Deck& deck, vector<Player> P
 // What are the player's names
 void GetPlayerNames(vector<Player>& players) {
 	string plyrName;
-  cout << "How many players are playing? " << endl;
+	cout << "How many players are playing? " << endl;
 	cin >> playerAmount;
 	while ((playerAmount < 2) || (playerAmount > 10)) {
 		cout << "There must be 2 or more players to play UNO. Player number cannot exceed 10 players." << endl << endl << "How many players are playing? ";
 		cin >> playerAmount;
 	}
 	if ((playerAmount >= 2) || (playerAmount <= 10)) {
-		for (int i = 0; i <  playerAmount; ++i) {   // playerAmount is number of players
+		for (int i = 0; i <  playerAmount; ++i) {	// playerAmount is number of players
 			cout << "Please enter player " << i + 1 << "'s name: ";	// ask user for their name
 			cin >> plyrName;    // get user input
 			players.push_back(Player(plyrName));    // each name entered goes into the vector (element 0 is player 1)
@@ -377,13 +376,13 @@ bool PlyrsHaveCardsRemaining(Player currentPlayer, int playerAmount) {
 		if (currentPlayer.GetHand().size() == 0) {  // if current player's hand size is 0
 			return 0;							
 		}
-    }
+	}
 	return true;
 }
 
 bool PlayerHasZeroCards(Player currentPlayer, Card topCard, Deck& deck) {
-	if (currentPlayer.GetHand().size() == 0) {  // checks to see if player has zero cards (not the loop that checks if all players
-	string checkUno;                            // have zero cards because there is a possibility that two cards can be added to that player's hand
+	if (currentPlayer.GetHand().size() == 0) {	// checks to see if player has zero cards (not the loop that checks if all players
+	string checkUno;				// have zero cards because there is a possibility that two cards can be added to that player's hand
 	cout << "You have no more cards, type \"UNO\" : ";
 	cin >> checkUno;
 		if ((checkUno == "UNO") || (checkUno == "uno") || (checkUno == "Uno")) {
@@ -414,7 +413,7 @@ int PlayerHas500Points(vector<Player> players) {
 
 // debug: winners will output until code aborts
 void WhoWins(vector<Player> players) {
-	int highScore = players.at(0).GetPoints();  // get first player points value
+	int highScore = players.at(0).GetPoints();	// get first player points value
 	cout << "Game over!" << endl << endl;
 	for (int i = 0; i < players.size(); ++i) {	// output all player's points
 		cout << players.at(i).GetName() << "'s points: " << players.at(i).GetPoints() << endl;
@@ -466,8 +465,8 @@ bool goodHand = false;
 bool playerWins = false;
 int ind;
 int cardsDrawn = 0;	// 1 2 4
-int incrOrDecr = 0; // increment or decrement value (set later in the code)
-srand(time(NULL));  // shuffled deck contains a random seed based off time of day (to ensure completely random cards every game)
+int incrOrDecr = 0;	// increment or decrement value (set later in the code)
+srand(time(NULL));	// shuffled deck contains a random seed based off time of day (to ensure completely random cards every game)
 
 // output for rules of the game
     OutputRules();
